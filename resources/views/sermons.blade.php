@@ -59,59 +59,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 ftco-animate">
-                    <div class="sermons">
-                        <a href="https://vimeo.com/45830194"
-                            class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
-                            style="background-image: url(images/sermons-4.jpg);">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="icon-play"></span>
-                            </div>
-                        </a>
-                        <div class="text">
-                            <h3><a href="#">Be at Peace With One Another</a></h3>
-                            <span class="position">Pastor. Joseph Meyer</span>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 ftco-animate">
-                    <div class="sermons">
-                        <a href="https://vimeo.com/45830194"
-                            class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
-                            style="background-image: url(images/sermons-5.jpg);">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="icon-play"></span>
-                            </div>
-                        </a>
-                        <div class="text">
-                            <h3><a href="#">Inspirational Message of God</a></h3>
-                            <span class="position">Pastor. Joseph Meyer</span>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 ftco-animate">
-                    <div class="sermons">
-                        <a href="https://vimeo.com/45830194"
-                            class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
-                            style="background-image: url(images/sermons-6.jpg);">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="icon-play"></span>
-                            </div>
-                        </a>
-                        <div class="text">
-                            <h3><a href="#">Prayers, Presence, and Provision</a></h3>
-                            <span class="position">Dave Zuleger</span>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
-                        </div>
-                    </div>
-                </div>
+                <x-sermon-element :link="'https://vimeo.com/45830194'" :title="'ddddd'" :pastor="'Bassime Amram'" :description="'Die nou s applele'" :poster="'images/sermons-6.jpg'" />
+                <x-sermon-element :link="'https://vimeo.com/45830194'" :title="'Prayer Presence and Providence'" :pastor="'Ngapana Joel'" :description="'Dieu nous applele et nous aimes'" :poster="'images/sermons-5.jpg'" />
+                
             </div>
 
             <div class="row mt-5">

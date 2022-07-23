@@ -11,9 +11,18 @@ class SermonElement extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $link;
+    public $pastor;
+    public $poster;
+    public $title;
+    public $description;
+     public function __construct($link,$pastor,$poster,$description,$title)
     {
-        //
+        $this->link = $link;
+        $this->pastor = $pastor;
+        $this->poster = $poster;
+        $this->description = $description;
+        $this->title = $title;
     }
 
     /**

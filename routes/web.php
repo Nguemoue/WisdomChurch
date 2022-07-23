@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivreController;
@@ -31,9 +32,10 @@ Route::get("/events",[EventController::class,"index"])->name("events.index");
 Route::get("/sermons",[SermonController::class,"index"])->name("sermons.index");
 
 // Livres
-Route::get("/livres",[LivreController::class,"index"])->name("livres.index");
+Route::get("/Books",[LivreController::class,"index"])->name("livres.index");
 
-
+// Administrateur
+Route::get("kt-admin",[AdminController::class,"index"])->middleware("auth.admin");
 
 // Auth
 require __DIR__.'/auth.php';

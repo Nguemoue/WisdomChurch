@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Models\Sermon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +13,9 @@ class HomeController extends Controller
     // methodes qui gere la page d'acceuil (la route / )
     function index(){
         // traitements
-        return view("index");
+        $sermons = Sermon::orderBy("created_at","desc")->get()->take(3);
+        $events = Event::orderBy("created_at","desc")->get()->take(3);
+        return view("index",compact("sermons","events"));
     }
 
     // Route contacts

@@ -1,46 +1,15 @@
-@extends("template")
+@extends('template')
 
-@section("title") Acceuil @endsection
+@section('title')
+    Acceuil
+@endsection
 
-@section("content")
-    
-    <section class="ftco-bible-study">
-        <div class="container-wrap">
-            <div class="col-md-12 wrap">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 d-md-flex">
-                            <div class="one-forth ftco-animate">
-                                <h3>Bible Study</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                    Consonantia.</p>
-                            </div>
-                            <div class="one-half d-md-flex align-items-md-center ftco-animate">
-                                <div class="countdown-wrap">
-                                    <p class="countdown d-flex">
-                                        <span id="days"></span>
-                                        <span id="hours"></span>
-                                        <span id="minutes"></span>
-                                        <span id="seconds"></span>
-                                    </p>
-                                </div>
-                                <div class="button">
-                                    <p><a href="#" class="btn btn-primary p-3">Events Details</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+@section('content')
     <section class="ftco-section-2">
         <div class="container-fluid">
             <div class="section-2-blocks-wrapper d-flex row no-gutters">
                 <div class="img col-md-6 ftco-animate" style="background-image: url('images/about.jpg');">
-                    <a href="https://vimeo.com/45830194" class="button popup-vimeo"><span
-                            class="ion-ios-play"></span></a>
+                    <a href="https://vimeo.com/45830194" class="button popup-vimeo"><span class="ion-ios-play"></span></a>
                 </div>
                 <div class="text col-md-6 ftco-animate">
                     <div class="text-inner align-self-start">
@@ -161,60 +130,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 ftco-animate">
-                    <div class="sermons">
-                        <a href="https://vimeo.com/45830194"
-                            class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
-                            style="background-image: url(images/sermons-1.jpg);">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="icon-play"></span>
-                            </div>
-                        </a>
-                        <div class="text">
-                            <h3><a href="#">Be at Peace With One Another</a></h3>
-                            <span class="position">Pastor. Joseph Meyer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 ftco-animate">
-                    <div class="sermons">
-                        <a href="https://vimeo.com/45830194"
-                            class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
-                            style="background-image: url(images/sermons-2.jpg);">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="icon-play"></span>
-                            </div>
-                        </a>
-                        <div class="text">
-                            <h3><a href="#">Inspirational Message of God</a></h3>
-                            <span class="position">Pastor. Joseph Meyer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 ftco-animate">
-                    <div class="sermons">
-                        <a href="https://vimeo.com/45830194"
-                            class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
-                            style="background-image: url(images/sermons-3.jpg);">
-                            <div class="icon d-flex justify-content-center align-items-center">
-                                <span class="icon-play"></span>
-                            </div>
-                        </a>
-                        <div class="text">
-                            <h3><a href="#">Prayers, Presence, and Provision</a></h3>
-                            <span class="position">Dave Zuleger</span>
-                        </div>
-                    </div>
-                </div>
+
+                @foreach ($sermons as $sermon)
+                    <x-sermon-element :link="route('sermons.show', ['sermon' => $sermon->id])" :title="$sermon->titre" :pastor="$sermon->author" :description="Str::words($sermon->description, 5)"
+                        :poster="asset('storage/' . $sermon->poster_url)" />
+                @endforeach
             </div>
             <div class="row mt-5">
                 <div class="col text-center">
-                    <p><a href="#" class="btn btn-primary btn-outline-primary p-3">Watch all sermons</a></p>
+                    <p><a href="{{route('sermons.index')}}" class="btn btn-primary btn-outline-primary p-3">Watch all sermons</a></p>
                 </div>
             </div>
         </div>
     </section>
-    
+
     {{-- Testimonies --}}
     <section class="ftco-section testimony-section bg-light">
         <div class="container">
@@ -399,8 +328,8 @@
         </div>
     </section>
 
-    {{--  blog section --}}
-    <section class="ftco-section">
+    {{-- blog section --}}
+    {{-- <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
@@ -464,7 +393,5 @@
                 </div>
             </div>
         </div>
-    </section>
-
-
+    </section> --}}
 @endsection

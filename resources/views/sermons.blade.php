@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-4 ftco-animate">
+                {{-- <div class="col-md-4 ftco-animate">
                     <div class="sermons">
                         <a href="https://vimeo.com/45830194"
                             class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
@@ -57,17 +57,17 @@
                                 regelialia.</p>
                         </div>
                     </div>
-                </div>
-
-                <x-sermon-element :link="'https://vimeo.com/45830194'" :title="'ddddd'" :pastor="'Bassime Amram'" :description="'Die nou s applele'" :poster="'images/sermons-6.jpg'" />
-                <x-sermon-element :link="'https://vimeo.com/45830194'" :title="'Prayer Presence and Providence'" :pastor="'Ngapana Joel'" :description="'Dieu nous applele et nous aimes'" :poster="'images/sermons-5.jpg'" />
+                </div> --}}
+                @foreach ($sermons as $sermon)
+                <x-sermon-element :link="route('sermons.show',['sermon'=>$sermon->id])" :title="$sermon->titre" :pastor="$sermon->author" :description="Str::words($sermon->description,5)" :poster="asset('storage/'.$sermon->poster_url)" />
+                @endforeach
                 
             </div>
 
             <div class="row mt-5">
                 <div class="col text-center">
                     <div class="block-27">
-                        <ul>
+                        {{-- <ul>
                             <li><a href="#">&lt;</a></li>
                             <li class="active"><span>1</span></li>
                             <li><a href="#">2</a></li>
@@ -75,7 +75,8 @@
                             <li><a href="#">4</a></li>
                             <li><a href="#">5</a></li>
                             <li><a href="#">&gt;</a></li>
-                        </ul>
+                        </ul> --}}
+                        {{$sermons->links()}}
                     </div>
                 </div>
             </div>

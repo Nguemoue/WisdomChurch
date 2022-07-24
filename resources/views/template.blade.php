@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/toastr.css') }}" />
     <link rel="stylesheet" href="css/katana.css" />
     <script>
         (function(w, d) {
@@ -102,6 +103,9 @@
 
     {{-- loader && scripts --}}
     @includeIf('_partials.script')
+
+    {{-- include the toast session message --}}
+    @includeIf("_partials.session_messages")
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/wisdom/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Jan 2022 11:52:17 GMT -->

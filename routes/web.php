@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminEventController;
+use App\Http\Controllers\Admin\AdminLivreController;
+use App\Http\Controllers\Admin\AdminSermonController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
@@ -30,12 +33,27 @@ Route::get("/events",[EventController::class,"index"])->name("events.index");
 
 // Sermons
 Route::get("/sermons",[SermonController::class,"index"])->name("sermons.index");
+Route::get("/sermons/{sermon}",[SermonController::class,"show"])->name("sermons.show");
 
 // Livres
 Route::get("/Books",[LivreController::class,"index"])->name("livres.index");
 
 // Administrateur
-Route::get("kt-admin",[AdminController::class,"index"])->middleware("auth.admin");
+Route::get("kt-admin",[AdminController::class,"index"])->name("admin.index")->middleware("auth.admin");
+
+Route::group(["as"=>"admin.","prefix"=>"kt-admin"],function(){
+    
+    Route::resource("events",AdminEventController::class);
+    
+    Route::resource("livres",AdminLivreController::class);
+
+    Route::resource("sermons",AdminSermonController::class);
+
+    Route::get("users",[AdminController::class,"users"])->name("users.index");
+
+});
+
+
 
 // Auth
 require __DIR__.'/auth.php';

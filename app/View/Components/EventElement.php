@@ -11,9 +11,18 @@ class EventElement extends Component
      *
      * @return void
      */
-    public function __construct()
+    
+    public $poster;
+    public $titre;
+    public $date;
+    public $lieu;
+    public function __construct($poster,$titre,$date,$lieu)
+    
     {
-        //
+        $this->poster = $poster;
+        $this->titre = $titre;
+        $this->date = $date;
+        $this->lieu = $lieu;
     }
 
     /**

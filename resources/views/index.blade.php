@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    @includeIf("_partials.upcoming-event")
+
     <section class="ftco-section-2">
         <div class="container-fluid">
             <div class="section-2-blocks-wrapper d-flex row no-gutters">

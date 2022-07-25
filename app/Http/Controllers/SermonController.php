@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class SermonController extends Controller
 {
     //
+    function __construct()
+    {
+        
+    }
     function index(){
         $sermons = Sermon::paginate(2);
         // dd($sermons);
@@ -15,6 +19,8 @@ class SermonController extends Controller
     }
 
     function show($id){
-        dd($id);  
+        $sermon = Sermon::findOrFail($id);
+        $other = Sermon::query()->whereKeyNot($id)->get();
+        return view("sermons_show",compact("sermon","other"));
     }
 }

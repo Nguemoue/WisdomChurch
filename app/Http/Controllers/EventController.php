@@ -16,4 +16,9 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         return view("events_show",compact("event"));
     }
+
+    function lastevent(){
+        $event = Event::query()->orderBy("start_at","asc")->first();
+        return redirect()->route("events.show",['event'=>$event->id]);
+    }
 }

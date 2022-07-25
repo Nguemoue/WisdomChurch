@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         $data["data"] = $date->Format("M d, Y h:i:s");
         $data["msg"] = "ok";
         return response()->json($data);
+        
     });
 
     

@@ -36,6 +36,7 @@
 
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
                                     <button class="dropdown-item preview-item">
                                         <div class="preview-thumbnail">
                                             <div class="preview-icon bg-dark rounded-circle">
@@ -48,7 +49,7 @@
                                     </button>
                                 </form>
                                 <div class="dropdown-divider"></div>
-                                <button class="dropdown-item preview-item">
+                                <a  href="{{route('admin.live.done')}}" class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-lan-connect text-success"></i>
@@ -57,7 +58,7 @@
                                     <div class="preview-item-content">
                                         <p class="preview-subject mb-1">Direct</p>
                                     </div>
-                                </button>
+                                </a>
                             </div>
                         </li>
                     </ul>

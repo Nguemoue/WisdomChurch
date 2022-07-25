@@ -37,4 +37,8 @@ class AdminController extends Controller
         return redirect()->back()->with("messages.info","Profile mis a jour avec success");
 
     }
+
+    function live(Request $request){
+        return view("admin.live");
+    }
 }

@@ -2,7 +2,7 @@
         <a href="{{ $link }}" class="img popup-vimeo mb-3 d-flex justify-content-center align-items-center"
             style="background-image: url({{ $poster }});">
             <div class="icon d-flex justify-content-center align-items-center">
-                <span class="icon-item"></span>
+                <span class="icon-person"></span>
             </div>
         </a>
         <div class="text">

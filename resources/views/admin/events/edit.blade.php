@@ -62,15 +62,16 @@
         const tmp = document.getElementById("event");
         const cropButton = document.getElementById("crop")
         const file_poster = document.querySelector("#file_poster")
+        // file reader
         const fr = new FileReader();
+        fr.onloadend = finishLoad        
         var isCropped = false
         var cropper = null;
         const uploadHiden = document.getElementById("inputHide")
-        fr.onload = finishLoad
         cropButton.addEventListener("click", setCroppedImageToForm)
 
         async function finishLoad(data) {
-            tmp.src = data.target.result
+            await tmp.src = data.target.result
         }
 
         file_poster.addEventListener("change", (event) => {
@@ -79,8 +80,6 @@
 
             fr.readAsDataURL(files[0])
 
-            window.scrollTo(0, 1300)
-
             setTimeout(() => {
                 cropper = new Cropper(tmp, {
                     scalable: false,
@@ -88,7 +87,7 @@
                     aspectRatio: 1,
                     cropBoxResizable: false,
                 })
-            }, 500);
+            }, 1000);
 
         })
 

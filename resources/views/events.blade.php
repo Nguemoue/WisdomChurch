@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 @foreach ($events  as $event)
-                    <x-event-element :lieu="$event->lieu" :date="$event->start_at" :poster="asset('storage/'.$event->poster_url)" :titre="$event->titre"  >
+                    <x-event-element :lieu="$event->lieu" :link="route('events.show',['event'=>$event->id])" :date="$event->start_at" :poster="asset('storage/'.$event->poster_url)" :titre="$event->titre"  >
                         {{$event->description}}
                     </x-event-element>
                 @endforeach

@@ -4,29 +4,22 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class EventElement extends Component
+class LivreElement extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    
     public $poster;
-    public $titre;
-    public $date;
-    public $lieu;
     public $link;
-    public function __construct($poster,$titre,$date,$lieu,$link=null)
-    
+    public $title;
+     public function __construct($poster,$link,$title)
     {
+        //
         $this->poster = $poster;
-        $this->titre = $titre;
-        $this->date = $date;
-        $this->lieu = $lieu;
-        if($link!=null){
-            $this->link = $link;
-        }
+        $this->link = $link;
+        $this->title= $title; 
     }
 
     /**
@@ -36,6 +29,6 @@ class EventElement extends Component
      */
     public function render()
     {
-        return view('components.event-element');
+        return view('components.livre-element');
     }
 }

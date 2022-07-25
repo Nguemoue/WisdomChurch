@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+    Route::get("/event-date",function(){
+        $date = Event::query()->orderBy("start_at","asc")->pluck("start_at")->first();
+        $diff = now()->diff($date); 
+        $data["data"] = $date->Format("M d, Y h:i:s");
+        $data["msg"] = "ok";
+        return response()->json($data);
+    });
+
+    

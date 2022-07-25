@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/toastr.css') }}" />
-    <link rel="stylesheet" href="css/katana.css" />
+    <link rel="stylesheet" href="{{asset('css/katana.css')}}" />
     <script>
         (function(w, d) {
             ! function(e, t, r, a, s) {

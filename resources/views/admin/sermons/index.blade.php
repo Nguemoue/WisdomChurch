@@ -53,31 +53,5 @@
     <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
 @endpush
 @push('scripts')
-
-    @if (session()->has('messages.info'))
-        <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/toastr.js') }}"></script>
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "rtl": false,
-                "positionClass": "toast-top-full-width",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": 300,
-                "hideDuration": 1000,
-                "timeOut": 5000,
-                "extendedTimeOut": 1000,
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-            toastr["info"](`{{ session("messages.info")  }}`,"Information")
-        </script>
-    @endif
-
+    @includeIf("_partials.session_messages")
 @endpush

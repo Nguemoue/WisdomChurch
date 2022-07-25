@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminEventController;
 use App\Http\Controllers\Admin\AdminLivreController;
 use App\Http\Controllers\Admin\AdminSermonController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
@@ -30,7 +31,7 @@ Route::get("/contact",[HomeController::class,"contact"])->name("contact");
 
 // Events
 Route::get("/events",[EventController::class,"index"])->name("events.index");
-
+Route::get("events/{event}",[EventController::class,"show"])->name("events.show")->whereNumber("event");
 // Sermons
 Route::get("/sermons",[SermonController::class,"index"])->name("sermons.index");
 Route::get("/sermons/{sermon}",[SermonController::class,"show"])->name("sermons.show");
@@ -49,7 +50,10 @@ Route::group(["as"=>"admin.","prefix"=>"kt-admin"],function(){
 
     Route::resource("sermons",AdminSermonController::class);
 
-    Route::get("users",[AdminController::class,"users"])->name("users.index");
+    Route::resource("users",AdminUserController::class);
+
+    Route::post("profil/update",[AdminController::class,"changeProfile"])->name("profile.update");
+    Route::post("password/update",[AdminController::class,"changePassword"])->name("password.update");
 
 });
 

@@ -24,7 +24,7 @@
                             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                 <div class="navbar-profile border">
                                     <span class=" mx-2 p-3">{{ auth()->user()->name }}</span>
-                                    <img class="img-xs rounded-circle" src="{{ asset('images/user.jpg') }}" alt="">
+                                    <img class="img-xs rounded-circle" src="{{ asset('storage/'.auth()->user()->photo_url) }}" alt="">
                                     <p class="mb-0 d-none d-sm-block navbar-profile-name"></p>
                                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                 </div>

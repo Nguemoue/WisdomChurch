@@ -13,7 +13,7 @@ class LivreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,10 @@ class LivreRequest extends FormRequest
     {
         return [
             //
+            "titre"=>"required|string",
+            "poster_url"=>"required|file",
+            "resource_url"=>"required|file",
+            "description"=>"required|string"
         ];
     }
 }

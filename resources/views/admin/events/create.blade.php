@@ -1,5 +1,4 @@
 @extends('admin.template')
-
 @section('main')
     @if ($errors->any())
         <div class="alert alert-secondary alert-dismissible">
@@ -28,6 +27,7 @@
                     <label for="titre">Date de Debut</label>
                     <input type="datetime-local" name="start_at" class="form-control">
                 </div>
+
                 <div class="mb-4">
                     <label for="titre">Poster De event</label>
                     <input type="file" id="file" name="poster_url" class="form-control-file border p-2" accept="image/*">
@@ -43,10 +43,11 @@
                     <button type="submit" class="btn btn-success">Creer</button>
                 </div>
             </form>
-            <div class="col-7  ">
+            <div class="col-7">
                 <div class="border p-1">
-                    <img src="" class="img-fluid" alt="" id="viewbox">
-                    <button class="btn btn-social-icon  btn-success" id="crop">crop</button>
+                    <img src="{{ asset('images/favicon.png') }}" class="img-fluid" alt="" id="imgblock">
+                    <button class="btn   btn-success" id="crop">recardrer</button>
+                    <button class="btn btn-danger  mt-2" id="del">delete</button>
                 </div>
             </div>
         </div>
@@ -58,63 +59,72 @@
 @push('scripts')
     <script src="{{ asset('js/cropper.js') }}"></script>
     <script defer>
-        const file_poster = document.getElementById("file"),
-            fr = new FileReader(),
-            uploadHiden = document.getElementById("inputHide"),
-            cropButton = document.getElementById("crop"),
-            tmp = document.getElementById("viewbox");
-
+        var tmp = document.getElementById("imgblock");
+        const ev2 = document.getElementById("event2");
+        const cropButton = document.getElementById("crop")
+        const file_poster = document.querySelector("#file")
+        const del = document.getElementById("del")
+        // file reader
+        const fr = new FileReader();
+        fr.onloadend = finishLoad
+        var isCropped = false
         var cropper = null;
-
-        fr.onload = finishLoad
-
-        async function finishLoad(data) {
-            tmp.src = data.target.result
+        const uploadHiden = document.getElementById("inputHide")
+        cropButton.addEventListener("click", setCroppedImageToForm)
+        del.onclick = function() {
+            if (cropper != null) {
+                if (cropper.cropped) {
+                    cropper.destroy()
+                }
+                cropper = null
+            }
         }
 
-        cropButton.onclick = function() {
-            setCroppedImageToForm()
+        function finishLoad(data) {
+            tmp.src = data.target.result
+            done()
+
         }
 
         file_poster.addEventListener("change", (event) => {
-
-            let files = event.target.files
-            let blob = files[0]
+            tmp.src = ""
+            const files = event.target.files
+            const blob = files[0]
             fr.readAsDataURL(files[0])
 
-            setInterval(() => {
-                cropper = new Cropper(tmp, {
-                    scalable: true,
-                    viewMode: 6/2,
-                    aspectRatio: 1,
-                    cropBoxResizable: false,
-                });
-            }, 1000);
         })
 
         function done() {
-            cropper = new Cropper(tmp, {
-                scalable: false,
-                viewMode: 2,
-                aspectRatio: 1,
-                cropBoxResizable: false,
-            });
+            if (cropper == null) {
+                cropper = new Cropper(tmp, {
+                    scalable: true,
+                    viewMode: 3,
+                    aspectRatio: 16 / 9,
+                    cropBoxResizable: true,
+                })
+            }
+
         }
 
         function setCroppedImageToForm() {
-            console.log(cropper)
-            const canvas = cropper.getCroppedCanvas();
-            canvas.toBlob(function(blob) {
-                var fr2 = new FileReader();
-                fr2.readAsDataURL(blob);
-                fr2.onloadend = function(data) {
-                    uploadHiden.value = data.target.result;
-                    console.log(uploadHiden.value)
-                    // document.getElementById("form").submit();
-                };
-            });
 
-            isCropped = true
+            // canvas = cropper.getCroppedCanvas();
+            // setTimeout(() => {
+            if (cropper != null) {
+                canvas = cropper.getCroppedCanvas();
+                canvas.toBlob(function(blob) {
+                    var fr2 = new FileReader();
+                    fr2.readAsDataURL(blob);
+                    fr2.onloadend = function(data) {
+                        uploadHiden.value = data.target.result;
+                        console.log(uploadHiden.value)
+                        // document.getElementById("form").submit();
+                    };
+                });
+            } else {
+                console.log("initialize cropper firsty")
+            }
+            // }, 500);
         }
     </script>
 @endpush

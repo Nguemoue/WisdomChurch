@@ -10,6 +10,7 @@ use App\Http\Requests\EventRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SermonRequest;
 use GuzzleHttp\Psr7\Request as Psr7Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +24,7 @@ class AdminEventController extends Controller
     public function index()
     {
         //
-        $events = Event::all();
+        $events = Event::query()->get();
         return view("admin.events.index",compact("events"));
     }
 
@@ -45,7 +46,6 @@ class AdminEventController extends Controller
      */
     public function store(EventRequest $request)
     {
-        //
         $event = new Event();
         $event->titre = $request->titre;
         $event->description = $request->description;
@@ -53,9 +53,15 @@ class AdminEventController extends Controller
         $event->poster_url = $request->file("poster_url")->store("events");
         $event->start_at = $request->start_at;
         $event->user_id = $request->user()->id;
-
+        if($request->cropdata == null){
+            $event->poster_url = $request->file("poster_url")->store("events");
+        }else{
+        $event->poster_url =$this->saveCroppedImage($request->cropdata);
+        }
         $event->save();
+        
         return redirect()->route("admin.events.index")->with("messages.info","Evenement cree avec success");
+    
     }
 
     /**
@@ -78,7 +84,7 @@ class AdminEventController extends Controller
     public function edit($id)
     {
         //
-                $event = Event::findOrFail($id);
+        $event = Event::findOrFail($id);
         $e =  view("admin.events.edit",compact("event"))->render();
         return $e;
     }
@@ -96,17 +102,12 @@ class AdminEventController extends Controller
         $event->lieu = $request->lieu;
         $event->titre = $request->titre;
         $event->description = $request->description;
-        if($request->cropdata){
-            $image_parts = explode(";base64,",$request->cropdata);
-            $img_aux = explode("image/",$image_parts[0]);
-            $ext = $img_aux[1];
-            $data = $image_parts[1];
-            $data = base64_decode($data);
-            $name = "poster/".uniqid().".".$ext;
-            $res = Storage::disk("public")->put($name,$data);
+        if($request->cropdata!=null){
             $delRes = Storage::delete($event->poster_url);
-            $event->poster_url = $name;
+            $event->poster_url = $this->saveCroppedImage($request->cropdata);
             
+        }else{
+            $event->poster_url = $request->file("poster_url")->store("poster");
         }
         
         $event->save();

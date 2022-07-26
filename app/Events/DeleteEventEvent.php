@@ -19,8 +19,10 @@ class DeleteEventEvent
      *
      * @return void
      */
-    public function __construct()
+    public $collect_events;
+    public function __construct($collect_events)
     {
+        $this->collect_events = $collect_events;
         //
     }
 

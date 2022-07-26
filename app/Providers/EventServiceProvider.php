@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\DeleteEventEvent;
+use App\Listeners\DeleteEventListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        DeleteEventEvent::class=>[
+            DeleteEventListener::class
+        ]
     ];
 
     /**
@@ -28,5 +33,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
     }
 }

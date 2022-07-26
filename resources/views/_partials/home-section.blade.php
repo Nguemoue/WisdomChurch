@@ -17,7 +17,7 @@
                             @elseif(Route::is('livres.*'))
                                 Livre
                             @else
-                                {{ Route::current()->uri }}
+                                {{Str::upper(Route::current()->uri) }}
                             @endif
                         @endif
                     </span>
@@ -33,7 +33,7 @@
                     @elseif (Route::is('home'))
                         Acceuil
                     @else
-                        {{ Route::current()->uri }}
+                        {{ Str::upper(Route::current()->uri) }}
                     @endif
 
                 </h1>

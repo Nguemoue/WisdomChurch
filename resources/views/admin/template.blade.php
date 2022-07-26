@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('vendors/owl-carousel-2/owl.carousel.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendors/owl-carousel-2/owl.theme.default.min.css')}}"/>
 
+    @stack("styles")
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -23,7 +24,6 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
     <!-- End layout styles -->
     <link rel="shortcut icon" href="" />
-    @stack("styles")
 </head>
 
 <body>

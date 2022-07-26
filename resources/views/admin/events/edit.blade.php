@@ -45,8 +45,9 @@
             <br>
             <img src="{{ asset('storage' . DIRECTORY_SEPARATOR . $event->poster_url) }}" class="img-fluid" id="event"
                 alt="">
+            <img src="" width="50" id="event2" alt="">
             <button class="btn btn-social-icon btn-success mt-2" id="crop">crop</button>
-
+            <button class="btn btn-danger btn-social-icon mt-2" id="del">delete</button>
         </p>
     </div>
 @endsection
@@ -59,48 +60,60 @@
 @endpush
 @push('scripts')
     <script defer>
-        const tmp = document.getElementById("event");
+        var tmp = document.getElementById("event");
+        const ev2 = document.getElementById("event2");
         const cropButton = document.getElementById("crop")
         const file_poster = document.querySelector("#file_poster")
+        const del = document.getElementById("del")
         // file reader
         const fr = new FileReader();
-        fr.onloadend = finishLoad        
+        fr.onloadend = finishLoad
         var isCropped = false
         var cropper = null;
         const uploadHiden = document.getElementById("inputHide")
         cropButton.addEventListener("click", setCroppedImageToForm)
+        del.onclick = function() {
+            if (cropper != null) {
+                if (cropper.cropped) {
+                    cropper.destroy()
+                }
+                cropper = null
+            }
+        }
 
-        async function finishLoad(data) {
-            await tmp.src = data.target.result
+        function finishLoad(data) {
+            tmp.src = data.target.result
+            ev2.src = data.target.result
+            done()
+
         }
 
         file_poster.addEventListener("change", (event) => {
+            tmp.src = ""
             const files = event.target.files
             const blob = files[0]
-
             fr.readAsDataURL(files[0])
-
-            setTimeout(() => {
-                cropper = new Cropper(tmp, {
-                    scalable: false,
-                    viewMode: 1,
-                    aspectRatio: 1,
-                    cropBoxResizable: false,
-                })
-            }, 1000);
 
         })
 
+        function done() {
+            if (cropper == null) {
+                cropper = new Cropper(tmp, {
+                    scalable: true,
+                    viewMode: 3,
+                    aspectRatio: 16 / 9,
+                    cropBoxResizable: true,
+                })
+            }
+
+        }
+
         function setCroppedImageToForm() {
-            if (!isCropped) {
-                if (cropper == null) {
-                    cropper = new Cropper(tmp, {
-                        scalable: false,
-                        viewMode: 1,
-                        aspectRatio: 1,
-                        cropBoxResizable: false,
-                    })
-                }
+
+            console.log("setc called")
+            // canvas = cropper.getCroppedCanvas();
+            // setTimeout(() => {
+            if (cropper != null) {
                 canvas = cropper.getCroppedCanvas();
                 canvas.toBlob(function(blob) {
                     var fr2 = new FileReader();
@@ -111,9 +124,22 @@
                         // document.getElementById("form").submit();
                     };
                 });
-
-                isCropped = true
+            } else {
+                done()
+                setTimeout(() => {
+                    canvas = cropper.getCroppedCanvas();
+                    canvas.toBlob(function(blob) {
+                        var fr2 = new FileReader();
+                        fr2.readAsDataURL(blob);
+                        fr2.onloadend = function(data) {
+                            uploadHiden.value = data.target.result;
+                            console.log(uploadHiden.value)
+                            // document.getElementById("form").submit();
+                        };
+                    });
+                }, 500);
             }
+            // }, 500);
         }
     </script>
 @endpush

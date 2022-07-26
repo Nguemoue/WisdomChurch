@@ -14,9 +14,9 @@
                             poster="{{ asset('storage/' . $sermon->poster_url) }}" controls>
                         </video>
                         <div class="text">
-                            <h3><a href="#">{{ $sermon->titre }}</a></h3>
-                            <span class="position">{{ $sermon->author }}</span>
-                            <p>
+                            <h3 class="titre-video">{{ $sermon->titre }}</h3>
+                            <span class="position author-video">{{ $sermon->author }}</span>
+                            <p class="description-video">
                                 {{ $sermon->description }}.
                             </p>
                         </div>
@@ -26,10 +26,14 @@
                     <h3>Autres videos</h3>
                     @foreach ($other as $item)
                         <div class="mb-3 d-flex align-items-center justify-content-between border p-4">
-                            <img src="{{ asset('storage/' . $item->poster_url) }}" class="img img-fluid img-sm" alt=""
+                            <img src="{{ asset('storage/' . $item->poster_url) }}" class="img img-thumbnail user-img img-sm" alt=""
                                 width="150" max-width="200">
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
                             <span class="badge bg-secondary ml-3">{{ $item->titre }}</span>
-                            <button data-poster="{{ asset('storage/' . $item->poster_url) }}"
+                            <button data-poster="{{ asset('storage/' . $item->poster_url) }}" data-description="{{$item->description}}"
+                                data-author="{{$item->author}}" data-titre="{{$item->titre}}"
                                 data-video="{{ asset('storage/' . $item->video_url) }}"
                                 class="change-video btn btn-primary">Suivre</button>
                         </div>
@@ -47,14 +51,23 @@
         changeButtons.forEach(element => {
             element.addEventListener("click", (event) =>{
                 console.log(this)
+                let nextDiv = video.nextElementSibling
+                let author = nextDiv.querySelector(".author-video");
+                let description = nextDiv.querySelector(".description-video")
+                let titre = nextDiv.querySelector(".titre-video")
+                // alert(nextDiv.querySelector(".author-video"))
                 let src = event.target.dataset.video
                 let poster = event.target.dataset.poster
-                
+                titre.innerText = event.target.dataset.titre
+                description.innerText = event.target.dataset.description
+                author.innerText = event.target.dataset.author
+
                 // je permujte sur le poster
-                event.target.dataset.video = video.src
-                event.target.dataset.poster = video.poster
+                // event.target.dataset.video = video.src
+                // event.target.dataset.poster = video.poster
                 video.src = src
                 video.poster = poster
+
 
             })
         });

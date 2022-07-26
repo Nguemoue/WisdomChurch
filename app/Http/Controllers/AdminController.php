@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\LiveNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,7 +39,8 @@ class AdminController extends Controller
 
     }
 
-    function live(Request $request){
+    function live(Request $request){        
         return view("admin.live");
+        
     }
 }

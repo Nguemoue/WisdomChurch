@@ -13,7 +13,7 @@ class SermonController extends Controller
         
     }
     function index(){
-        $sermons = Sermon::paginate(2);
+        $sermons = Sermon::paginate(6);
         // dd($sermons);
         return view("sermons",compact("sermons"));
     }

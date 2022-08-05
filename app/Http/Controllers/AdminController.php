@@ -20,6 +20,9 @@ class AdminController extends Controller
         ]);
         $password = $request->input("password");
         $cpassword = $request->input("cpassword");
+        if($password!=$cpassword){
+        	return  redirect()->back()->with("messages.error","Les mots de passe ne correspondent pas");
+		}
         $user = User::findOrfail(auth()->user()->id);
         $user->password = bcrypt($password);
         $user->save();
@@ -39,8 +42,12 @@ class AdminController extends Controller
 
     }
 
-    function live(Request $request){        
+    function live(Request $request){
         return view("admin.live");
-        
+
     }
+
+    function diffuse(){
+
+	}
 }

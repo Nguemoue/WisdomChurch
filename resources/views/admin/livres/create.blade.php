@@ -25,6 +25,7 @@
                     <label for="titre">Poster De livre</label>
                     <input type="file" id="file" name="poster_url" class="form-control-file border p-2" accept="image/*">
                 </div>
+
                 <div class="mb-4">
                     <label for="titre">Chemin du pdf</label>
                     <input type="file" id="file" name="resource_url" class="form-control-file border p-2"
@@ -34,7 +35,14 @@
                     <label for="titre">Description livre</label>
                     <textarea id="description" name="description" class="form-control border p-2"></textarea>
                 </div>
-
+				<div class="mb-4">
+					<label for="langue">Langue </label>
+					<select name="langue" id="langue" class="select2-container form-control">
+						<option value="francais">Francais</option>
+						<option value="anglais">Anglais</option>
+						<option value="billingue">Billingue</option>
+					</select>
+				</div>
                 <input type="hidden" name="cropdata" value="" id="inputHide">
                 <div>
                     <button type="reset" class="btn btn-danger">Reinitialiser</button>

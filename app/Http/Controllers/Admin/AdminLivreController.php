@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LivreRequest;
 use App\Models\Livre;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class AdminLivreController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -25,7 +28,7 @@ class AdminLivreController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -33,12 +36,12 @@ class AdminLivreController extends Controller
         return view("admin.livres.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param LivreRequest $request
+	 * @return RedirectResponse
+	 */
     public function store(LivreRequest $request)
     {
         //
@@ -46,6 +49,7 @@ class AdminLivreController extends Controller
         $livre->titre = $request->titre;
         $livre->description = $request->description;
         $livre->poster_url = $request->file("poster_url")->store("poster");
+      	$livre->langue = $request->input("langue");
         $livre->resource_url = $request->file("resource_url")->store("pdf");
 
         $livre->save();
@@ -56,20 +60,18 @@ class AdminLivreController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+	/**
+	 * @param $id
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+	 */
+	public function edit($id)
     {
         //
         $livre = Livre::findOrFail($id);
@@ -81,10 +83,10 @@ class AdminLivreController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
-    {
+	{
         //
         $livre = Livre::findOrFail($id);
 
@@ -98,6 +100,7 @@ class AdminLivreController extends Controller
             $livre->resource_url = $request->file("resource_url")->store("pdf");
         }
 
+        $livre->langue = $request->input("langue");
         $livre->titre = $request->titre;
         $livre->updated_at = now();
         $livre->description = $request->description;
@@ -105,19 +108,12 @@ class AdminLivreController extends Controller
         return redirect()->route("admin.livres.index")->with("messages.info","Livre edite avec success");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
-        $livre = Livre::findORFail($id);
+        $livre = Livre::query()->findOrFail($id);
         Storage::delete($livre->poster_url);
         Storage::delete($livre->resource_url);
-
         $livre->delete();
         return redirect()->route("admin.livres.index")->with("messages.info","livres supprime avec success");
     }

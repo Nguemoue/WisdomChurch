@@ -20,12 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
     Route::get("/event-date",function(){
-        $date = Event::query()->orderBy("start_at","asc")->where("start_at",">",now())->pluck("start_at")->first();
-        $diff = now()->diff($date); 
-        $data["data"] = $date->Format("M d, Y h:i:s");
+        $date = Event::query()->orderBy("start_at","asc")->where("start_at",">",now()->subDay())->pluck("start_at")->first();
+        $diff = now()->diff($date);
+		$data["date"] = $date;
+		$data["data"] = $date->Format("M d, Y h:i:s");
         $data["msg"] = "ok";
         return response()->json($data);
-        
+
     });
 
-    

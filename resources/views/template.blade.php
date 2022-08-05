@@ -34,9 +34,9 @@
 <body>
     @includeIf('_partials.navbar')
 
-    @includeIf("_partials.home-section")    
+    @includeIf("_partials.home-section")
 
-    
+
     @yield('content')
 
     {{-- footer --}}
@@ -48,6 +48,7 @@
     {{-- include the toast session message --}}
     @includeIf("_partials.session_messages")
     @stack("scripts")
+	<script src="{{asset('js/app.js')}}"></script>
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/wisdom/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 17 Jan 2022 11:52:17 GMT -->

@@ -19,17 +19,18 @@
                     <legend class="mb-4">Details sur le live</legend>
                     <div class="form-group">
                         <label for="titre">Titre du live</label>
-                        <input type="text" name="titre" class="form-control" id="">
+                        <input type="text" name="titre" class="form-control" id="titre">
                     </div>
                     <div class="form-group">
                         <label for="titre">Lien</label>
-                        <input type="url" name="lien" class="form-control" id="">
+                        <input type="url" name="lien" class="form-control" id="lien">
                     </div>
 
-                    <button tabindex="1" type="submit" class="btn btn-success">Valider</button>
+                    <button tabindex="1" type="button" class="btn btn-success" id="submitButton">Valider</button>
                 </fieldset>
             </div>
         </div>
     </div>
+	<script src="{{asset('js/live.js')}}"></script>
 </body>
 </html>

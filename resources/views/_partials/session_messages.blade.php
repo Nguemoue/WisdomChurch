@@ -3,18 +3,18 @@
     <script type="text/javascript" src="{{ asset('js/toastr.js') }}"></script>
     <script>
         toastr.options = {
-            "closeButton": true,
+            "closeButton": false,
             "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
+            "newestOnTop": true,
+            "progressBar": false,
             "rtl": false,
-            "positionClass": "toast-top-full-width",
+            // "positionClass": "toast-top-full-width",
             "preventDuplicates": false,
             "onclick": null,
             "showDuration": 300,
             "hideDuration": 400,
             "timeOut": 5000,
-            "extendedTimeOut": 1000,
+            "extendedTimeOut": 500,
             "showEasing": "swing",
             "hideEasing": "linear",
             "showMethod": "fadeIn",
@@ -26,8 +26,8 @@
         @if (session()->has('messages.success'))
             toastr["success"](`{{ session('messages.success') }}`, "Information")
         @endif
-        @if (session()->has('messages.danger'))
-            toastr["danger"](`{{ session('messages.danger') }}`, "Information")
+        @if (session()->has('messages.error'))
+            toastr["error"](`{{ session('messages.error') }}`, "Attention")
         @endif
     </script>
 @endif

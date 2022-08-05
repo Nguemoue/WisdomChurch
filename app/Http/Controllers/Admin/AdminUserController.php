@@ -5,17 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AdminUserController extends Controller
 {
-    /**
+
+	public function __construct()
+	{
+
+	}
+
+	/**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        //
         $users = User::query()->where("admin","=",1)->whereKeyNot(request()->user()->id);
         $admins=User::query()->where("admin","=",0)->whereKeyNot(request()->user()->id);
         return view("admin.users.index",compact("users","admins"));
@@ -24,7 +30,7 @@ class AdminUserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {

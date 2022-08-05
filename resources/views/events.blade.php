@@ -1,6 +1,5 @@
 @extends("template")
 
-
 @section("content")
 <section class="ftco-section ftco-section-2">
         <div class="container">
@@ -10,7 +9,7 @@
                         {{$event->description}}
                     </x-event-element>
                 @endforeach
-                
+
             </div>
             <div class="row mt-5">
                 <div class="col text-center">

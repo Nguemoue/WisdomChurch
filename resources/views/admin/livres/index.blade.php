@@ -13,8 +13,10 @@
                     <th>#</th>
                     <th>Titre</th>
                     <th>Poster</th>
-                    <th>Description</th>
-                    <th>Poste le </th>
+					<th>Langue</th>
+					<th>Description</th>
+					<th>Poste le </th>
+
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,7 +26,8 @@
                         <td>{{ $loop->index + 1 }}</td>
                         <td> {{ $livre->titre }} </td>
                         <td><img src="{{asset('storage/'.$livre->poster_url)}}" style="border-radius: 0;transform: scale(2) translateX(50%);" class="card d-block border"  alt=""></td>
-                        <td>{{ Str::words($livre->description??"Non definie",2) }}</td>
+                        <td>{{$livre->langue}}</td>
+						<td>{{ Str::words($livre->description??"Non definie",2) }}</td>
                         <td> {{ $livre->created_at->Format("d M y") }} </td>
                         <td>
                             <div class="btn-group">

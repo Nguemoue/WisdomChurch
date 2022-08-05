@@ -13,14 +13,22 @@
                     <input type="text" name="titre" value="{{ $livre->titre }}" class="form-control">
                 </div>
 
-                
+				<div class="mb-4">
+					<label for="langue">Langue </label>
+					<select name="langue" id="langue" class="select2-container form-control">
+						<option @if($livre->langue == 'francais') selected @endif value="francais">Francais</option>
+						<option @if($livre->langue == 'anglais') selected @endif value="anglais">Anglais</option>
+						<option @if($livre->langue == 'billingue') selected @endif value="billingue">Billingue</option>
+					</select>
+				</div>
+
                 <div class="mb-4">
                     <label for="titre">Description</label>
                     <textarea name="description" class="form-control" id="" cols="30" rows="5">
                         {{ trim($livre->description) }}
                     </textarea>
                 </div>
-            
+
                 <div class="mb-4">
                     <label for="titre">Nouveau Poster Du livre</label>
                     <input type="file" id="file_poster" name="poster_url" class="form-control-file border p-2"

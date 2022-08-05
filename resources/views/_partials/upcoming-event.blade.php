@@ -11,7 +11,7 @@
                             </div>
                             <div class="one-half d-md-flex align-items-md-center ftco-animate">
                                 <div class="countdown-wrap">
-                                    <p class="countdown d-flex">
+                                    <p class="countdown d-flex" id="demo">
                                         <span id="days"></span>
                                         <span id="hours"></span>
                                         <span id="minutes"></span>

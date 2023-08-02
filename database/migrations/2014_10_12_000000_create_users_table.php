@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string("photo_url")->nullable(true)->default("user.jpg");
             $table->softDeletes();
             $table->boolean("admin")->default(false);
-            $table->string("tel");
+            $table->string("tel")->nullable();
         });
     }
 

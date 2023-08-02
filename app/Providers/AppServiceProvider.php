@@ -26,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
+        \Blade::if("checked",function ($condition){
+        	return $condition?'checked':'';
+		});
     }
 }

@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\SharedDefaultLanguageServiceProvider::class,
     ],
 
     /*
@@ -229,7 +230,15 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+		"ReturnStatus"=>\App\Constant\ReturnStatus::class
 
     ],
 
+	//props
+	'props_name'=>[
+		'members'=>"members",
+		"saved_life"=>"lives saved",
+		"church"=>"Churches",
+		"logo"=>"logo"
+	],
 ];

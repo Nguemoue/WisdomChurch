@@ -1,5 +1,5 @@
 <section id="home" class="video-hero js-fullheight"
-    style="height:700px;background-image:url(images/xbg_1.jpg.pagespeed.ic.iqKPxttw_o.jpg);background-size:cover;background-position:center center;background-attachment:fixed"
+{{--    style="height:700px;background-image:url(images/xbg_1.jpg.pagespeed.ic.iqKPxttw_o.jpg);background-size:cover;background-position:center center;background-attachment:fixed"--}}
     data-section="home">
     <div class="overlay js-fullheight"></div>
     <div class="container">
@@ -8,7 +8,8 @@
             <div class="col-md-10 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                 <p class="breadcrumbs mb-2" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
                         class="mr-2"><a href="{{ route('home') }}">Home</a></span>
-                    <span>
+					<i class="fa text-white fa-chevron-right"></i>
+					<span class="d-inline-block ml-2">
                         @if (!Route::is('home'))
                             @if (Route::is('events.*'))
                                 Event

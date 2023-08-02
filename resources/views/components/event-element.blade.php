@@ -1,7 +1,7 @@
 @php
     $day = $date->day;
     $year = $date->year;
-    $month = $date->Format("M");    
+    $month = $date->Format("M");
     $time = $date->Format("h:s a");
     $link = $link??'#'
 @endphp

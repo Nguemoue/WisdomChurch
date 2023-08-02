@@ -21,7 +21,7 @@ class Controller extends BaseController
         $data = $image_parts[1];
         $data = base64_decode($data);
         $name = $to_path."/".uniqid().".".$ext;
-        $res = Storage::disk("public")->put($name,$data);
+        $res = Storage::put($name,$data);
         return $name;
     }
 

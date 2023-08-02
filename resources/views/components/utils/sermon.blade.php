@@ -1,0 +1,4 @@
+@props(["sermon"])
+<div>
+
+</div>

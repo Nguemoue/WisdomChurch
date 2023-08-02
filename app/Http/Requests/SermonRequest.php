@@ -21,14 +21,16 @@ class SermonRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(): array
+	{
         return [
             'titre'=>['required',"string"],
             "description"=>["required","string"],
             "author"=>["required","string"],
-            "poster_url"=>["required","file"],
-            "video_url"=>["required","file"]
+            "poster_url"=>["required","file","image"],
+            "video_url"=>["nullable","file"],
+			"type"=>["required","filled"],
+			"video_link"=>["nullable","active_url"]
         ];
 
     }

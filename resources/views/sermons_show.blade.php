@@ -1,41 +1,70 @@
 @extends('template')
 
+@push("stylesheets")
+	<link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+	<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet">
+	<style>
+		.btn-player{
+			display: inline-block;
+			position: relative;
+		}
+		.btn-player[data-current='true']{
+			color: #0b0b0b;
+			place-content: end;
+			content: "en cours";
+			/*visibility: hidden;*/
+		}
+		.btn-player[data-current='true']::after{
+			content: 'En cours de lecture....';
+			overflow-x: hidden;
+			position: absolute;
+			top: 0;
+			text-wrap: normal;
+			right: 0;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+
+			background-color: #00a045;
+			color: #0b0b0b;
+
+		}
+	</style>
+@endpush
 @section('content')
     <br><br>
     <section class="ftco-animate mt-4">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-7 ftco-animate">
-                    <div class="sermons">
-                        <video id="current" style="position: relative"
-                            class="img relative popup-vimeo d-flex justify-content-center align-items-center"
-                            style="background-image: url({{ asset('storage/' . $sermon->poster_url) }});"
-                            src="{{ asset('storage/' . $sermon->video_url) }}"
-                            poster="{{ asset('storage/' . $sermon->poster_url) }}" controls>
-                        </video>
-                        <div class="text">
-                            <h3 class="titre-video">{{ $sermon->titre }}</h3>
-                            <span class="position author-video">{{ $sermon->author }}</span>
-                            <p class="description-video">
+                    <div class="card">
+						<div class="card-header">
+							<h3 id="titre-video">{{ $sermon->titre }}</h3>
+						</div>
+						<div class="card-body">
+							<video id="my-video" class="video-js vjs-theme-city vjs-fluid " preload="auto"
+								   poster="{{asset('storage/' . $sermon->poster_url)}}" src="{{ $sermon->custom_link }}" />
+						</div>
+						<div class="card-footer">
+                            <span id="author-video" class="position">{{ $sermon->author }}</span>
+                            <p id="description-video">
                                 {{ $sermon->description }}.
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col border">
-                    <h3>Autres videos</h3>
+                <div class="col border shadow">
+                    <h3 class="text-center">Autres videos</h3>
                     @foreach ($other as $item)
-                        <div class="mb-3 d-flex align-items-center justify-content-between border p-4">
+                        <div class="mb-3 bg-warning d-flex align-items-center justify-content-around border p-2">
                             <img src="{{ asset('storage/' . $item->poster_url) }}" class="img img-thumbnail user-img img-sm" alt=""
                                 width="150" max-width="200">
                                 &nbsp;
-                                &nbsp;
-                                &nbsp;
-                            <span class="badge bg-secondary ml-3">{{ $item->titre }}</span>
-                            <button data-poster="{{ asset('storage/' . $item->poster_url) }}" data-description="{{$item->description}}"
+                            <span class="badge bg-secondary ml-3">{{ Str::substr($item->titre,0,10) }} ...</span>
+                            <button  @if($item->id == $sermon->id) data-current="true" @endif data-poster="{{ asset('storage/' . $item->poster_url) }}" data-description="{{$item->description}}"
                                 data-author="{{$item->author}}" data-titre="{{$item->titre}}"
-                                data-video="{{ asset('storage/' . $item->video_url) }}"
-                                class="change-video btn btn-primary">Suivre</button>
+                                data-video="{{ $item->custom_link }}"
+                                class="change-video btn-player rounded-0 btn btn-primary">Suivre</button>
                         </div>
                     @endforeach
                 </div>
@@ -45,31 +74,33 @@
 @endsection
 
 @push('scripts')
-    <script defer>
-        const changeButtons = document.querySelectorAll(".change-video")
-        const video = document.getElementById("current")
-        changeButtons.forEach(element => {
-            element.addEventListener("click", (event) =>{
-                console.log(this)
-                let nextDiv = video.nextElementSibling
-                let author = nextDiv.querySelector(".author-video");
-                let description = nextDiv.querySelector(".description-video")
-                let titre = nextDiv.querySelector(".titre-video")
-                // alert(nextDiv.querySelector(".author-video"))
-                let src = event.target.dataset.video
-                let poster = event.target.dataset.poster
-                titre.innerText = event.target.dataset.titre
-                description.innerText = event.target.dataset.description
-                author.innerText = event.target.dataset.author
+	<script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
 
-                // je permujte sur le poster
-                // event.target.dataset.video = video.src
-                // event.target.dataset.poster = video.poster
-                video.src = src
-                video.poster = poster
+	<script>
+		const videoPlayer = videojs("my-video",{
+			controls:true,
+			responsive:true
+		})
+        $(document).ready(function(){
+        	$(".change-video").click(function (){
+				//je desactive tout les data-current a true
+				$("[data-current]").each(function(index,elt){
+					$(elt).data("current",false)
+					// elt.removeAttribute("data-current")
+				})
+        		$(this).data("current",true)
+				let poster = $(this).data("poster")
+				let src = $(this).data("video")
+				let titre = $(this).data("titre")
+				let desc = $(this).data("description")
+				let auteur = $(this).data("author")
 
-
-            })
-        });
+				videoPlayer.poster(poster)
+				videoPlayer.src(src)
+				$("#description-video").text(desc)
+				$("#titre-video").text(titre)
+				$("#author-video").text(auteur)
+			})
+		})
     </script>
 @endpush

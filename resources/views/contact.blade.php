@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('content')
-    
+
     <section class="ftco-section contact-section ftco-degree-bg">
         <div class="container bg-light">
             <div class="row d-flex mb-5 contact-info">
@@ -10,19 +10,16 @@
                 </div>
                 <div class="w-100"></div>
                 <div class="col-md-3">
-                    <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+                    <p><span>Address:</span>Yaounde ,Awae</p>
                 </div>
                 <div class="col-md-3">
-                    <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                    <p><span>Phone:</span> <a href="tel://1234567920">+ 237 69956 8073</a></p>
                 </div>
                 <div class="col-md-3">
-                    <p><span>Email:</span> <a
-                            href="https://preview.colorlib.com/cdn-cgi/l/email-protection#bfd6d1d9d0ffc6d0cacdccd6cbda91dcd0d2"><span
-                                class="__cf_email__"
-                                data-cfemail="741d1a121b340d1b0106071d00115a171b19">[email&#160;protected]</span></a></p>
+                    <p><span>Email:</span> <a><span>lucchuala@gmail.com</span></a></p>
                 </div>
                 <div class="col-md-3">
-                    <p><span>Website</span> <a href="#">yoursite.com</a></p>
+                    <p><span>Website</span> <a href="#">katana.com</a></p>
                 </div>
             </div>
             <div class="row block-9">

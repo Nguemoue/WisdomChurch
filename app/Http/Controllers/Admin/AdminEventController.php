@@ -42,26 +42,26 @@ class AdminEventController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+     * @return \Illuminate\Http\RedirectResponse
+	 */
     public function store(EventRequest $request)
     {
         $event = new Event();
         $event->titre = $request->titre;
         $event->description = $request->description;
         $event->lieu = $request->lieu;
-        $event->poster_url = $request->file("poster_url")->store("events");
+//        $event->poster_url = $request->file("poster_url")->store("events");
         $event->start_at = $request->start_at;
         $event->user_id = $request->user()->id;
         if($request->cropdata == null){
             $event->poster_url = $request->file("poster_url")->store("events");
         }else{
-        $event->poster_url =$this->saveCroppedImage($request->cropdata);
+        	$event->poster_url = $this->saveCroppedImage($request->cropdata);
         }
         $event->save();
-        
+
         return redirect()->route("admin.events.index")->with("messages.info","Evenement cree avec success");
-    
+
     }
 
     /**
@@ -105,11 +105,11 @@ class AdminEventController extends Controller
         if($request->cropdata!=null){
             $delRes = Storage::delete($event->poster_url);
             $event->poster_url = $this->saveCroppedImage($request->cropdata);
-            
+
         }else{
             $event->poster_url = $request->file("poster_url")->store("poster");
         }
-        
+
         $event->save();
         return redirect()->route("admin.events.index")->with("messages.info","L'evenement precedent a ete modifier avec success" );
     }

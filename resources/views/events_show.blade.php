@@ -9,7 +9,7 @@
                     <img class="img " src="{{asset('storage/'.$event->poster_url)}}" alt="">
                 </div>
                 <div class="col col-6">
-                    <div class="card border p-4">
+                    <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Details Sur l'evenement</h3>
 

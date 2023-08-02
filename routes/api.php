@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LastDateController;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,17 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::as("api.")->group(function (){
+	Route::get("/event-date", LastDateController::class)->name("event-date");
 });
 
-    Route::get("/event-date",function(){
-        $date = Event::query()->orderBy("start_at","asc")->where("start_at",">",now()->subDay())->pluck("start_at")->first();
-        $diff = now()->diff($date);
-		$data["date"] = $date;
-		$data["data"] = $date->Format("M d, Y h:i:s");
-        $data["msg"] = "ok";
-        return response()->json($data);
-
-    });
 

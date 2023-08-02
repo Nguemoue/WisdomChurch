@@ -1,6 +1,4 @@
 @if (session()->has('messages'))
-    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/toastr.js') }}"></script>
     <script>
         toastr.options = {
             "closeButton": false,

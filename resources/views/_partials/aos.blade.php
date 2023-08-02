@@ -13,7 +13,7 @@
 		}
 		"use strict";
 		var countDownDate = null
-		$.get("/api/event-date").then(data => {
+		/*$.get("/api/event-date").then(data => {
 			let t = countDownDate
 			countDownDate = new Date(data.date).getTime()
 			if (t == null) {
@@ -54,7 +54,7 @@
 				}, 1000);
 			}
 
-		})
+		})*/
 		var isMobile = {
 			Android: function () {
 				return navigator.userAgent.match(/Android/i);
@@ -352,8 +352,10 @@
 		// };
 		// bgVideo();
 
+		let d = $("#demo").data("date")
+
 		// Set the date we're counting down to
-		// countDownDate = new Date("Jul 26, 2022 08:27:25").getTime();
+		countDownDate = new Date(d).getTime();
 
 		// Update the count down every 1 second
 		var x = setInterval(function () {

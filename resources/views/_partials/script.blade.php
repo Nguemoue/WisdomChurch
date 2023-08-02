@@ -8,20 +8,34 @@
 
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/jqm.js')}}"></script>
-<script>eval(mod_pagespeed_OLL4zPBdzd);</script>
-<script>eval(mod_pagespeed_xW8EsGIr6U);</script>
-<script>eval(mod_pagespeed_gQYlOcYYEh);</script>
-<script>eval(mod_pagespeed_QJJ74ekXYL);</script>
 <script src="{{asset('js/jqway.js')}}"></script>
-<script>eval(mod_pagespeed_c7EG$C0sQY);</script>
-<script>eval(mod_pagespeed_sQoJA1rOwx);</script>
-<script>eval(mod_pagespeed_jv1AducBPr);</script>
-<script>eval(mod_pagespeed_6srvpolzan);</script>
 <script src="{{asset('js/aos.js')}}"></script>
-<script>eval(mod_pagespeed_MgpTB_UVJY);</script>
-<script>eval(mod_pagespeed_LvgcUAdas4);</script>
 <script src="{{asset('js/katana.js')}}"></script>
-<script>eval(mod_pagespeed_Cm7VpuEp3m);</script>
-<script>eval(mod_pagespeed_na1JImZDsy);</script>
+<script defer>
+	eval(mod_pagespeed_OLL4zPBdzd);
+	eval(mod_pagespeed_xW8EsGIr6U);
+	eval(mod_pagespeed_gQYlOcYYEh);
+	eval(mod_pagespeed_QJJ74ekXYL);
+	eval(mod_pagespeed_c7EG$C0sQY);
+	eval(mod_pagespeed_sQoJA1rOwx);
+	eval(mod_pagespeed_jv1AducBPr);
+	eval(mod_pagespeed_6srvpolzan);
+	eval(mod_pagespeed_MgpTB_UVJY);
+	eval(mod_pagespeed_LvgcUAdas4);
+	eval(mod_pagespeed_Cm7VpuEp3m);
+	eval(mod_pagespeed_na1JImZDsy);
+</script>
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
+{{--<script></script>--}}
 
 @includeIf("_partials.aos")

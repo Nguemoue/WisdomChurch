@@ -1,6 +1,6 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-    
+
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
         <a class="sidebar-brand brand-logo" href="{{ route('admin.index') }}">
             <span color="#ffffff">ADMINISTRATION</span>
@@ -59,6 +59,23 @@
                 <span class="menu-title">Events</span>
             </a>
         </li>
+		<li @class(["nav-item menu-items my-2","active"=>Route::is("admin.properties.*")])>
+			<a class="nav-link" href="{{ route('admin.properties.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-arrow-right-bold-hexagon-outline"></i>
+                </span>
+				<span class="menu-title">Parametres</span>
+			</a>
+		</li>
+
+		<li @class(["nav-item menu-items my-2","active"=>Route::is("admin.testimonies.*")])>
+			<a class="nav-link" href="{{ route('admin.testimonies.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-arrow-right-bold-hexagon-outline"></i>
+                </span>
+				<span class="menu-title">Temoignages</span>
+			</a>
+		</li>
 
         <div class="bg-white" style="color:brown"></div>
         <li class="nav-item menu-items my-1">

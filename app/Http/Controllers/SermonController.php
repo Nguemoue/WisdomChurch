@@ -10,7 +10,7 @@ class SermonController extends Controller
     //
     function __construct()
     {
-        
+
     }
     function index(){
         $sermons = Sermon::paginate(6);
@@ -20,7 +20,7 @@ class SermonController extends Controller
 
     function show($id){
         $sermon = Sermon::findOrFail($id);
-        $other = Sermon::query()->whereKeyNot($id)->get();
+        $other = Sermon::query()->get()->sortByDesc(function($elt)use ($id){return $elt->id==$id;});
         return view("sermons_show",compact("sermon","other"));
     }
 }
